@@ -1,0 +1,19 @@
+{
+  "name": "@evidence-dev/csv",
+  "version": "0.0.1",
+  "description": "CSV support for Evidence projects",
+  "main": "index.cjs",
+  "author": "Archie Wood",
+  "license": "MIT",
+  "scripts": {
+    "test": "uvu test test.js"
+  },
+  "dependencies": {
+    "duckdb": "0.4.0",
+    "@evidence-dev/db-commons": "workspace:^"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.1"
+  },
+  "type": "module"
+}
