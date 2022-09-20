@@ -5,21 +5,16 @@ const { processQueryResults } = require('@evidence-dev/db-commons')
 
 const runQuery = async (queryString, database) => {
     
-    const filename = database ? path.parse(database.filename).name  : process.env["CSV_FILENAME"] || process.env["csv_filename"] || process.env["CSV_FILENAME"]
-    const filepath = filename !== ":memory:" ? "../../" + filename + ".csv" : filename
-    try {
-        const db = new duckdb.Database(":memory:");
-        db.all(queryString, function(error, result){
-            if (error) {
-                    throw error
-                }
-            console.log(processQueryResults(result))
-            return processQueryResults(result);
-            });  
-        
-        } catch(err) {
-            throw err.message
-        }
+    const db = new duckdb.Database("../../unit_savings_data.csv"); // hardcode - replace with actual settings handler 
+    return new Promise((resolve, reject) => {
+        db.all(queryString, (err, rows) => {
+            if (err) {
+                reject(err);
+            }else{
+                resolve(processQueryResults(rows)) // process query results isn't actually leveraging duckdb's column types
+            }
+        }); 
+    })
 }
 
 module.exports = runQuery
