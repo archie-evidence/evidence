@@ -73,10 +73,10 @@ importers:
     specifiers:
       '@evidence-dev/db-commons': workspace:^
       dotenv: ^16.0.1
-      duckdb: 0.4.0
+      duckdb: ^0.5.1
     dependencies:
       '@evidence-dev/db-commons': link:../db-commons
-      duckdb: 0.4.0
+      duckdb: 0.5.1
     devDependencies:
       dotenv: 16.0.1
 
@@ -6573,8 +6573,8 @@ packages:
   /downloadjs/1.4.7:
     resolution: {integrity: sha1-9p+W+UDg0FU9rCkROYZaPNAQHjw=}
 
-  /duckdb/0.4.0:
-    resolution: {integrity: sha512-xSi5ZMm+OVegutwn4IQxP7zui/lV4r4S8y6+abkcLIiA6b7WWV97UrEYLdN5lxg67nS9aZ+YDfNm3hCgnpruqw==}
+  /duckdb/0.5.1:
+    resolution: {integrity: sha512-4z2VeoszKPkZwtbgYmEqZngdz5tsgVvsT8eFQFgkgbyQWis0BMGEP2VhaVQFgWFl5MZW27JIQOLGI5d6GugqmA==}
     requiresBuild: true
     dependencies:
       '@mapbox/node-pre-gyp': 1.0.9
