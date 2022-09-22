@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@evidence-dev/db-commons": "workspace:^",
-    "duckdb": "^0.5.1"
+    "duckdb": "0.5.1",
+    "chalk": "4.1.0"
   },
   "devDependencies": {
     "dotenv": "^16.0.1"

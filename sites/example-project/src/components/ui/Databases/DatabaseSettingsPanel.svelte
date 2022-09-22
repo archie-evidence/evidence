@@ -4,6 +4,7 @@
     import SnowflakeForm from '@evidence-dev/components/ui/Databases/SnowflakeForm.svelte'
     import MysqlForm from '@evidence-dev/components/ui/Databases/MysqlForm.svelte'
     import SqliteForm from '@evidence-dev/components/ui/Databases/SqliteForm.svelte'
+    import CSVForm from '@evidence-dev/components/ui/Databases/CSVForm.svelte'
     import { slide, blur } from 'svelte/transition'
 
     export let settings 
@@ -21,7 +22,8 @@
 		{id: 'postgres', name: 'PostgreSQL', formComponent: PostgresForm},
 		{id: 'mysql', name: 'MySQL', formComponent: MysqlForm},
 		{id: 'snowflake', name: 'Snowflake', formComponent: SnowflakeForm},
-        {id: 'sqlite', name: 'SQLite', formComponent: SqliteForm}
+        {id: 'sqlite', name: 'SQLite', formComponent: SqliteForm},
+        {id: 'csv', name: 'CSV', formComponent: CSVForm}
 	];
 
     let selectedDatabase = databaseOptions.filter(d => d.id === settings.database)[0] ?? databaseOptions[0];
@@ -65,9 +67,11 @@
         }
 	};
 
-    function databaseChange() {
+    function databaseChange(selectedDatabase) {
         testResult = null;
-        disableSave = true;
+        if (selectedDatabase!='csv'){
+            disableSave = true;
+        }
     }
 </script>
 
@@ -77,7 +81,7 @@
             <h1>Database Connection</h1>
             <p>Evidence supports one database connection per project.</p>
             <h2>Connection Type</h2>
-            <select data-test-id='dbConnectionType' bind:value={selectedDatabase} on:change={databaseChange}>
+            <select data-test-id='dbConnectionType' bind:value={selectedDatabase} on:change={databaseChange(selectedDatabase)}>
             {#each databaseOptions as option}
                 <option data-test-id={option.id} id={option.id} value={option} label={option.name}>
                     {option.name}
