@@ -41,16 +41,16 @@ export async function get() {
     }
 }
 
-
+// still not working quite right for swap between csv and sqlite types
 export function post(request) {
     const {settings} = JSON.parse(request.body)
     fs.writeFileSync('evidence.settings.json', JSON.stringify(settings));
-    if(settings.database === "sqlite"){
+    if((settings.database === "sqlite")||(settings.database === "csv")){
         let gitIgnore;
         let hasGitIgnore = fs.existsSync('../../.gitignore');
         gitIgnore = hasGitIgnore ? fs.readFileSync('../../.gitignore', 'utf8') : "";
-        let extensions = [".db", ".sqlite", ".sqlite3"]
-        if(settings.credentials.gitignoreSqlite === false){
+        let extensions = [".db", ".sqlite", ".sqlite3", ".csv"];
+        if((settings.credentials.gitignoreSqlite === false)||(settings.credentials.gitignoreCSV === false)){
             let regex
             if(hasGitIgnore){
                 extensions.forEach(ext => {
@@ -63,7 +63,7 @@ export function post(request) {
                 })
                 fs.writeFileSync('../../.gitignore', gitIgnore)
             }
-        } else if(settings.credentials.gitignoreSqlite === true){
+        } else if((settings.credentials.gitignoreSqlite === true)||(settings.credentials.gitignoreCSV === true)){
             extensions.forEach(ext => {
                 regex = new RegExp(`\n${ext}(?=\n|$)`, "g")
                 if(!gitIgnore.match(regex)){
