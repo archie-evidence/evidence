@@ -58,9 +58,6 @@ jobs:
   Tests-sources:
     runs-on: ${{ matrix.os }}
     if: ${{ github.actor == 'archiewood' || github.actor == 'mcrascal' || github.actor == 'ud3sh' || github.actor == 'hughess'}}
-    needs: [ approve ]
-    environment:
-      name: Integrate Pull Request
     timeout-minutes: 20
     strategy:
       fail-fast: false
